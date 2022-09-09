@@ -1,0 +1,117 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.item {
+  display: flex;
+  gap: 20px;
+ 
+}
+
+.carousel {
+  display: flex;
+  
+}
+
+
+.btn {
+  font-size: 100px;
+  color: #2F4F4F;
+  cursor: pointer;
+}
+
+.card {
+  width: 200px;
+  height: 200px;
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #9370DB;
+}
+
+.item:first-child .card {
+  background: #FFA07A;
+}
+
+.item:last-child .card {
+  background: #DEB887 ;
+}
+
+.carousel-wrapper {
+  width: 640px;
+  margin: 0 20px;
+  overflow: hidden;
+}
+
+.carousel {
+  position: relative;
+  left: -640px;
+}
+
+@keyframes move-left {
+  from {left: -640px;}
+  to {left: 0px;}
+}
+
+.transition-left {
+  animation-name: move-left;
+  animation-duration: 1s;
+}
+
+@keyframes move-right {
+  from {left: -640px;}
+  to {left: -1280px;}
+}
+
+.transition-right {
+  animation-name: move-right;
+  animation-duration: 1s;
+}
+
+
+
+
+
+
+
+//1. Создаем переменные
+
+
+
+
+
+
+//2. Функция, создающая новые карточки
+
+
+
+
+
+
+//3. Функция для перелистывания влево
+// При нажатии добавляем карусели класс с анимацией влево
+// С кнопок убираем возможность прослушивать событие во время анимации
+
+
+
+
+//4. Функция для перелистывания вправо
+// При нажатии добавляем карусели класс с анимацией вправо
+// С кнопок убираем возможность прослушивать событие во время анимации
+
+
+
+//5. События, проиисходящие при нажатии на кнопки
+
+
+//6. То, что происходит по окончании анимации
+
+
+//Проверяем, имя анимации равно move left,
+// в конце анимации убираем с карусели класс с анимацией, чтобы можно было потом его снова добавить
+
+
+

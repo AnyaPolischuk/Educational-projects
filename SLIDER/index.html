@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Slider</title>
+<meta charset="utf-8">
+ <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrapper">
+    <div class="btn" id="btn-left">←</div>
+    <div class="carousel-wrapper">
+        <div class="carousel" id="carousel">
+            <div class="item" id="item-left">
+                <!-- <div class="card">1</div>
+                <div class="card">1</div>
+                <div class="card">1</div> -->
+            </div>
+            <div class="item" id="item-active">
+                <!-- <div class="card">2</div>
+                <div class="card">2</div>
+                <div class="card">2</div> -->
+            </div>
+            <div class="item" id="item-right">
+                <!-- <div class="card">3</div>
+                <div class="card">3</div>
+                <div class="card">3</div> -->
+            </div>
+        </div>
+    </div>
+    <div class="btn" id="btn-right">→</div>
+</div>
+
+<script>
+    const BTN_LEFT = document.querySelector('#btn-left');
+    const BTN_RIGHT = document.querySelector('#btn-right');
+    const CAROUSEL = document.querySelector('#carousel');
+    const ITEM_LEFT = document.querySelector('#item-left');
+    const ITEM_RIGHT = document.querySelector('#item-right');
+    const ITEM_ACTIVE = document.querySelector('#item-active');
+
+
+    
+    function createCard(array) {
+        let cards = [];
+
+        for (let i = 0; i < 3; i++) {
+            let card = document.createElement('div');
+            card.classList.add('card');
+            card.append(array[i]); //передать элемент массива с индексом i
+            cards.push(card);
+        }
+        return cards;
+    }
+
+     let array = ['how', 'are', 'you']; //допустим это массив с животными
+     let array1 = ['sweety', 'puy', 'lol'];
+     let array2 = ['hello', 'lovely', 'cat'];
+
+
+   ITEM_RIGHT.append(...createCard(array)); 
+   ITEM_LEFT.append(...createCard(array1));
+   ITEM_ACTIVE.append(...createCard(array2));
+
+
+
+
+    const moveLeft = () => {  // функция перелистывания
+        CAROUSEL.classList.add('transition-left');
+        BTN_LEFT.removeEventListener('click', moveLeft); //убираем возможность перелистывать карусель во время анимации
+        BTN_RIGHT.removeEventListener('click', moveRight);
+    }
+
+    const moveRight = () => {
+        CAROUSEL.classList.add('transition-right');
+        BTN_RIGHT.removeEventListener('click', moveRight);
+        BTN_LEFT.removeEventListener('click', moveLeft);
+    }
+
+    BTN_LEFT.addEventListener('click', moveLeft);
+    BTN_RIGHT.addEventListener('click', moveRight);
+
+    CAROUSEL.addEventListener('animationend', (animationEvent) => { // конец анимации
+        let changedItem;
+        let currentActive = ITEM_ACTIVE.innerHTML;
+        if (animationEvent.animationName === 'move-left') {
+            CAROUSEL.classList.remove('transition-left');
+            ITEM_ACTIVE.innerHTML = ITEM_LEFT.innerHTML; // теперь активный элемент сменился
+            ITEM_LEFT.innerHTML = ITEM_RIGHT.innerHTML;
+            ITEM_RIGHT.innerHTML = currentActive;
+
+         } else {
+            CAROUSEL.classList.remove('transition-right');
+            ITEM_ACTIVE.innerHTML = ITEM_RIGHT.innerHTML;
+            ITEM_RIGHT.innerHTML = ITEM_LEFT.innerHTML;
+            ITEM_LEFT.innerHTML = currentActive;
+        }
+
+
+        // генерация карточек
+        // changedItem.innerHTML = '';
+        // for (let i = 0; i < 3; i++) {
+        //     const card = createCardTemplate();
+        //     card.innerText = Math.floor(Math.random() * 8);
+        //     changedItem.appendChild(card);
+        // }
+            
+        BTN_LEFT.addEventListener('click', moveLeft); //возвращаем возможность тыкать на кнопку
+        BTN_RIGHT.addEventListener('click', moveRight);
+
+    });
+    
+   
+</script>
+</body>
+</html>
